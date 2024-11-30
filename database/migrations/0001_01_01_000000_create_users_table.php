@@ -35,6 +35,20 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        Schema::create('questions', function (Blueprint $table) {
+            $table->id();
+            $table->string('question_text');
+            $table->timestamps();
+        });
+
+        Schema::create('answers', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('question_id')->constrained()->onDelete('cascade');
+            $table->string('answer_text');
+            $table->boolean('is_correct')->default(false);
+            $table->timestamps();
+        });
     }
 
     /**
