@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->String('title')->default(''); //Tekst pitanja
+            $table->integer('difficulty')->default(1); //Tezina pitanja, 1 je najlakse a 3 je najteze, nose toliko poena
         });
     }
 

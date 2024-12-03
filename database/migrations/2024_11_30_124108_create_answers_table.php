@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
+            $table->string('content'); // Tekst odgovora
+            $table->boolean('is_correct')->default(false); // Da li je odgovor tačan
+            $table->foreignId('question_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

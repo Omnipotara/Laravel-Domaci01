@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['player', 'admin'])->default('player'); //Ova linija pravi kolonu Role u tabeli Users koja moze biti popunjena sa player/admin
             $table->rememberToken();
             $table->timestamps();
         });
@@ -36,19 +37,7 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
 
-        Schema::create('questions', function (Blueprint $table) {
-            $table->id();
-            $table->string('question_text');
-            $table->timestamps();
-        });
-
-        Schema::create('answers', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('question_id')->constrained()->onDelete('cascade');
-            $table->string('answer_text');
-            $table->boolean('is_correct')->default(false);
-            $table->timestamps();
-        });
+       
     }
 
     /**
